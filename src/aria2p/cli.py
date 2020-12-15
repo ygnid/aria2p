@@ -23,7 +23,7 @@ from loguru import logger
 
 from aria2p import enable_logger
 from aria2p.api import API
-from aria2p.client import DEFAULT_HOST, DEFAULT_PORT, DEFAULT_TIMEOUT, Client, ClientException
+from aria2p.client import DEFAULT_HOST, DEFAULT_PORT, DEFAULT_SECRET, DEFAULT_TIMEOUT, Client, ClientException
 from aria2p.types import PathOrStr
 from aria2p.utils import read_lines
 
@@ -197,7 +197,7 @@ def get_parser() -> argparse.ArgumentParser:
         "-s",
         "--secret",
         dest="secret",
-        default="",
+        default=DEFAULT_SECRET,
         help="Secret token to use to connect to the remote server.",
     )
     global_options.add_argument(

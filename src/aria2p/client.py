@@ -15,10 +15,19 @@ from loguru import logger
 from aria2p.types import CallsType, Multicalls2Type
 from aria2p.utils import SignalHandler
 
+from pathlib import Path
+
 DEFAULT_ID = -1
 DEFAULT_HOST = "http://localhost"
 DEFAULT_PORT = 6800
+DEFAULT_SECRET = ""
 DEFAULT_TIMEOUT: float = 60.0
+
+CONF_FILENAME = Path('~/.config/aria2p/config.json')
+if CONF_FILENAME.exists():
+    config = json.load(open(CONF_FILE))
+    globals().update(config)
+
 
 JSONRPC_PARSER_ERROR = -32700
 JSONRPC_INVALID_REQUEST = -32600
@@ -184,7 +193,7 @@ class Client:
         self,
         host: str = DEFAULT_HOST,
         port: int = DEFAULT_PORT,
-        secret: str = "",
+        secret: str = DEFAULT_SECRET,
         timeout: float = DEFAULT_TIMEOUT,
     ) -> None:
         """
